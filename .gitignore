@@ -1,0 +1,7 @@
+.gemini/
+.DS_Store
+node_modules/
+*.docx
+~$*.docx
+implementation_plan.md
+walkthrough.md
