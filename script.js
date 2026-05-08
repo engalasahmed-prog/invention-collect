@@ -101,24 +101,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 3000);
 
-    // Typewriter Effect
+    // Continuous Typewriter Effect
     const typeTarget = document.getElementById('typewriter');
     const textToType = "We Protect and Propel Your Ideas.";
     let charIndex = 0;
-    const typingSpeed = 100; // ms per character
+    let isDeleting = false;
+    const typingSpeed = 100;
+    const deletingSpeed = 50;
+    const pauseTime = 2000; // Wait when finished typing
 
-    function typeWriter() {
-        if (charIndex < textToType.length) {
-            typeTarget.textContent += textToType.charAt(charIndex);
-            charIndex++;
-            setTimeout(typeWriter, typingSpeed);
+    function handleTypewriter() {
+        const fullText = textToType;
+        
+        if (isDeleting) {
+            typeTarget.textContent = fullText.substring(0, charIndex - 1);
+            charIndex--;
         } else {
-            // Optional: Hide cursor or make it stay blinking
-            // document.querySelector('.cursor').style.display = 'none';
+            typeTarget.textContent = fullText.substring(0, charIndex + 1);
+            charIndex++;
         }
+
+        let nextSpeed = isDeleting ? deletingSpeed : typingSpeed;
+
+        if (!isDeleting && charIndex === fullText.length) {
+            nextSpeed = pauseTime;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            nextSpeed = 500; // Brief pause before starting again
+        }
+
+        setTimeout(handleTypewriter, nextSpeed);
     }
 
-    // Start typing after a short delay or when the section is revealed
-    setTimeout(typeWriter, 1000);
+    // Start the typewriter
+    setTimeout(handleTypewriter, 1000);
+
 });
 
