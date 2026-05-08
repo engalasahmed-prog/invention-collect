@@ -100,4 +100,25 @@ document.addEventListener('DOMContentLoaded', () => {
             // No actual change, just for visual "live" feel if we wanted to toggle
         }
     }, 3000);
+
+    // Typewriter Effect
+    const typeTarget = document.getElementById('typewriter');
+    const textToType = "We Protect and Propel Your Ideas.";
+    let charIndex = 0;
+    const typingSpeed = 100; // ms per character
+
+    function typeWriter() {
+        if (charIndex < textToType.length) {
+            typeTarget.textContent += textToType.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeWriter, typingSpeed);
+        } else {
+            // Optional: Hide cursor or make it stay blinking
+            // document.querySelector('.cursor').style.display = 'none';
+        }
+    }
+
+    // Start typing after a short delay or when the section is revealed
+    setTimeout(typeWriter, 1000);
 });
+

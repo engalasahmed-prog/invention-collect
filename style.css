@@ -251,6 +251,21 @@ nav {
     letter-spacing: -1px;
 }
 
+.cursor {
+    display: inline-block;
+    width: 3px;
+    background-color: var(--accent);
+    margin-left: 5px;
+    animation: blink 1s infinite;
+    vertical-align: middle;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+
 .hero-content p {
     max-width: 550px;
     font-size: 1.25rem;
